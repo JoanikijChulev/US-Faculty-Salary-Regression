@@ -1,0 +1,71 @@
+---
+title: "Data Analysis"
+author: "Joanikij Chulev"
+---
+
+
+```{r}
+library(haven)
+library(readr)
+dim(data)
+head(data)
+data <- read.csv("C:/Users/DAVID/Desktop/data.csv")
+```
+
+
+# Clean some data:
+```{r}
+data$adm_rate <- as.numeric(data$adm_rate)
+data$avgfacsal <- as.numeric(data$avgfacsal)
+data$tuitfte <- as.numeric(data$tuitfte)
+data$pctpell <- as.numeric(data$pctpell)
+data$debt_mdn <- as.numeric(data$debt_mdn)
+data$sat_avg <- as.numeric(data$sat_avg)
+data$ugds <- as.numeric(data$ugds)
+data$ugds_white <- as.numeric(data$ugds_white)
+data$ugds_black <- as.numeric(data$ugds_black)
+data$ugds_asian <- as.numeric(data$ugds_asian)
+data$ugds_hisp <- as.numeric(data$ugds_hisp)
+data$costt4_a <- as.numeric(data$costt4_a)
+data <- na.omit(data)
+```
+
+
+#Data transformation
+```{r}
+data$avgfacsal_t1 <- data$avgfacsal/max(data$avgfacsal)
+data$tuitfte_t1 <- data$tuitfte/max(data$tuitfte)
+data$debt_mdn_t1 <- data$debt_mdn/max(data$debt_mdn)
+data$sat_avg_t1 <- data$sat_avg/max(data$sat_avg)
+data$ugds_t1 <- data$ugds/max(data$ugds)
+data$costt4_a_t1 <- data$costt4_a/max(data$costt4_a)
+```
+
+
+
+#The regression model
+```{r}
+model_multt11 <- lm(avgfacsal_t1 ~
+                 tuitfte_t1 +
+                 debt_mdn_t1 +
+                 pctpell +
+                 ugds_t1 +
+                 sat_avg_t1 +
+                 ugds_white +
+                 ugds_black +
+                 ugds_asian +
+                 ugds_hisp +
+                 costt4_a_t1,
+                 data = data)
+
+model_multt11
+summary(model_multt11)
+
+```
+
+#The model anova
+```{r}
+summary(aov(model_multt11))
+anova(model_multt11)
+```
+

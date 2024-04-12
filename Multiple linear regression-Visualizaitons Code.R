@@ -1,0 +1,34 @@
+library(haven)
+library(ggplot2)
+
+data <- read.csv("C:/Users/DAVID/Desktop/data.csv")
+dim(data)
+head(data)
+
+# Clean some data:
+data$adm_rate <- as.numeric(data$adm_rate)
+data$avgfacsal <- as.numeric(data$avgfacsal)
+data$tuitfte <- as.numeric(data$tuitfte)
+data$pctpell <- as.numeric(data$pctpell)
+data$debt_mdn <- as.numeric(data$debt_mdn)
+data$sat_avg <- as.numeric(data$sat_avg)
+data$ugds <- as.numeric(data$ugds)
+data$ugds_white <- as.numeric(data$ugds_white)
+data$ugds_black <- as.numeric(data$ugds_black)
+data$ugds_asian <- as.numeric(data$ugds_asian)
+data$ugds_hisp <- as.numeric(data$ugds_hisp)
+data$costt4_a <- as.numeric(data$costt4_a)
+
+data <- na.omit(data)
+
+ggplot(data, aes(x = tuitfte ,y = avgfacsal))+ geom_point() + geom_smooth(method='lm') + ggtitle("Relationship between tuitfte & avgfacsal")
+ggplot(data, aes(x = pctpell ,y = avgfacsal))+ geom_point() + geom_smooth(method='lm') + ggtitle("Relationship between pctpell & avgfacsal")
+ggplot(data, aes(x = debt_mdn ,y = avgfacsal))+ geom_point() + geom_smooth(method='lm') + ggtitle("Relationship between debt_mdn & avgfacsal")
+ggplot(data, aes(x = sat_avg ,y = avgfacsal))+ geom_point() + geom_smooth(method='lm') + ggtitle("Relationship between sat_avg & avgfacsal")
+ggplot(data, aes(x = ugds ,y = avgfacsal))+ geom_point() + geom_smooth(method='lm') + ggtitle("Relationship between ugds & avgfacsal")
+ggplot(data, aes(x = ugds_white ,y = avgfacsal))+ geom_point() + geom_smooth(method='lm') + ggtitle("Relationship between ugds_white & avgfacsal")
+ggplot(data, aes(x = ugds_black ,y = avgfacsal))+ geom_point() + geom_smooth(method='lm') + ggtitle("Relationship between ugds_black & avgfacsal")
+ggplot(data, aes(x = ugds_asian ,y = avgfacsal))+ geom_point() + geom_smooth(method='lm') + ggtitle("Relationship between ugds_hisp & avgfacsal")
+ggplot(data, aes(x = ugds_hisp ,y = avgfacsal))+ geom_point() + geom_smooth(method='lm') + ggtitle("Relationship between ugds_asian & avgfacsal")
+ggplot(data, aes(x = costt4_a ,y = avgfacsal))+ geom_point() + geom_smooth(method='lm') + ggtitle("Relationship between costt4_a & avgfacsal")
+
